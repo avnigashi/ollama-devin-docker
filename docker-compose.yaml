@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  opendevin:
+    image: ghcr.io/opendevin/opendevin:0.7
+    container_name: opendevin-app
+    ports:
+      - "3000:3000"
+    environment:
+      - SANDBOX_USER_ID=${SANDBOX_USER_ID}
+      - WORKSPACE_MOUNT_PATH=/opt/workspace_base
+    volumes:
+      - ./workspace:/opt/workspace_base
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
